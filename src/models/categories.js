@@ -11,7 +11,7 @@ const schema = Schema({
   },
 });
 
-module.exports = model('Categories', schema);
+module.exports = { CategoriesModel: model('Categories', schema), CategoriesShema: schema };
 
 // products
 /*

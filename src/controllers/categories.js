@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const { v4: uuidv4 } = require('uuid');
 const { validationResult } = require('express-validator');
-const CategoriesModel = require('../models/categories');
+const { CategoriesModel } = require('../models/categories');
 const getToken = require('../utils/getToken');
 
 const getAllCategories = (req, res) => {
@@ -61,7 +61,7 @@ const updateCategory = (req, res) => {
   return false;
 };
 
-const deleteCategory = (req, res) => {};
+const deleteCategory = (req, res) => { };
 
 module.exports = {
   getAllCategories,
