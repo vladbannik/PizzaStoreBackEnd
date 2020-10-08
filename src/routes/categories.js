@@ -1,5 +1,6 @@
 const express = require('express');
-const { check } = require('express-validator');
+const withJWT = require('../utils/withJWT');
+const { nameValidator } = require('../validation/categories');
 const {
   getAllCategories,
   createCategory,
@@ -11,16 +12,10 @@ const router = express.Router();
 
 router.get('/', getAllCategories);
 
-router.post('/', [
-  check('name', 'Name must be required')
-    .exists(),
-], createCategory);
+router.post('/', [nameValidator, withJWT], createCategory);
 
-router.patch('/:id', [
-  check('name', 'Name must be required')
-    .exists(),
-], updateCategory);
+router.patch('/:id', [nameValidator, withJWT], updateCategory);
 
-router.delete('/:id', deleteCategory);
+router.delete('/:id', withJWT, deleteCategory);
 
 module.exports = router;
