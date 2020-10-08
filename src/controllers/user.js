@@ -1,52 +1,36 @@
-const jwt = require('jsonwebtoken');
 const { validationResult } = require('express-validator');
 const UserModel = require('../models/user');
-const getToken = require('../utils/getToken');
 
-const approveUser = (req, res) => {
-  const token = getToken(req);
-  if (!token) return res.status(401).json({ error: { message: 'Invalid token' } });
-  jwt.verify(token, process.env.SECRET, (err) => {
-    if (err) return res.status(401).json({ error: { message: 'Invalid token' } });
+const approveUser = async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    res.status(400).json({ errors: errors.array() });
+  }
 
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
+  const { id } = req.params;
 
-    const { id } = req.body;
-
-    UserModel.findOneAndUpdate({ id }, { approve: true }, { upsert: true }, (error) => {
-      if (error) return res.send(500, { error });
-      return res.status(200).json({ success: 'OK' });
-    });
-
-    return false;
-  });
-  return false;
+  try {
+    await UserModel.findOneAndUpdate({ id }, { approve: true }, { upsert: true });
+    res.status(200).json({ success: 'OK' });
+  } catch (e) {
+    res.status(500).send('Something went wrong');
+  }
 };
 
-const deleteUser = (req, res) => {
-  const token = getToken(req);
-  if (!token) return res.status(401).json({ error: { message: 'Invalid token' } });
-  jwt.verify(token, process.env.SECRET, (err) => {
-    if (err) return res.status(401).json({ error: { message: 'Invalid token' } });
+const deleteUser = async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    res.status(400).json({ errors: errors.array() });
+  }
 
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
+  const { id } = req.params;
 
-    const { id } = req.body;
-
-    UserModel.findOneAndDelete({ id }, {}, (error) => {
-      if (error) return res.send(500, { error });
-      return res.status(200).json({ success: 'OK' });
-    });
-
-    return false;
-  });
-  return false;
+  try {
+    await UserModel.findOneAndDelete({ id });
+    res.status(200).json({ success: 'OK' });
+  } catch (e) {
+    res.status(500).send('Something went wrong');
+  }
 };
 
 module.exports = { approveUser, deleteUser };
