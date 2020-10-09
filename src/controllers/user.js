@@ -1,6 +1,15 @@
 const { validationResult } = require('express-validator');
 const UserModel = require('../models/user');
 
+const getAllUsers = async (req, res) => {
+  try {
+    const docs = await UserModel.find({ }).select('id email approve -_id');
+    res.status(200).json(docs);
+  } catch (e) {
+    res.status(500).send('Something went wrong');
+  }
+};
+
 const approveUser = async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -33,4 +42,4 @@ const deleteUser = async (req, res) => {
   }
 };
 
-module.exports = { approveUser, deleteUser };
+module.exports = { approveUser, deleteUser, getAllUsers };
