@@ -1,0 +1,64 @@
+const { v4: uuidv4 } = require('uuid');
+const { validationResult } = require('express-validator');
+const ProductModel = require('../models/products');
+
+const getAllProducts = async (req, res) => {
+    try {
+        const docs = await ProductModel.find({}).select('id name description price img categoryId -_id');
+        res.status(200).json(docs);
+    } catch (e) {
+        res.status(501).json({ error: { message: 'Something went wrong' } });
+    }
+};
+
+const createProducts = async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        res.status(400).json({ errors: errors.array() });
+    }
+    const { name, description, price, img, categoryId } = req.body;
+    try {
+        await ProductModel.create({
+            id: uuidv4(),
+            name,
+            description,
+            price,
+            img,
+            categoryId,
+        });
+        res.status(200).json({ success: 'Product created' });
+    } catch (e) {
+        res.status(422).json({ error: { message: 'Category name is already taken' } });
+    }
+};
+
+const updateProduct = async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        res.status(400).json({ errors: errors.array() });
+    }
+    const { id } = req.params;
+    const { name, description, price, img, categoryId } = req.body;
+    try {
+        await ProductModel.findOneAndUpdate({ id }, { name, description, price, img, categoryId }, { upsert: true });
+        res.status(200).json({ success: 'OK' });
+    } catch (e) {
+        res.status(5000).send('Something went wrong');
+    }
+};
+const deleteProduct = async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        await ProductModel.findOneAndDelete({ id });
+        res.status(200).json({ success: 'OK' });
+    } catch (e) {
+        res.status(5000).send('Something went wrong');
+    }
+};
+module.exports = {
+    getAllProducts,
+    createProducts,
+    updateProduct,
+    deleteProduct
+};
