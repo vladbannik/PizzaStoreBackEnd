@@ -1,8 +1,10 @@
 const express = require('express');
 const withJWT = require('../utils/withJWT');
-const { approveUser, deleteUser } = require('../controllers/user');
+const { approveUser, deleteUser, getAllUsers } = require('../controllers/user');
 
 const router = express.Router();
+
+router.get('/', withJWT, getAllUsers);
 
 router.patch('/approve/:id', withJWT, approveUser);
 
