@@ -1,6 +1,6 @@
 # Pizza market server
 
-##Stack
+## Stack
 * Node JS - v.14.13.0
 * bcrypt - v.5.0.0
 * body-parser - v.1.19.0
@@ -12,7 +12,7 @@
 * uuid - v.8.3.0
 
 ---
-##Registration
+## Registration
 **URL:** `/auth/sing-up`
 
 **Method:** `POST`
@@ -39,7 +39,7 @@
 }
 ```
 
-###Success response
+### Success response
 
 **Code:** `200 OK`
 
@@ -50,7 +50,7 @@
 }
 ```
 
-###Error response
+### Error response
 
 **Code:** `422 Unprocessable Entity`
 
@@ -65,7 +65,7 @@
 
 ---
 
-##Login
+## Login
 **URL:** `/auth/sing-in`
 
 **Method:** `POST`
@@ -90,7 +90,7 @@
 }
 ```
 
-###Success response
+### Success response
 
 **Code:** `200 OK`
 
@@ -101,7 +101,7 @@
 }
 ```
 
-###Error response
+### Error response
 
 **Code:** `422 Unprocessable Entity`
 
@@ -116,7 +116,7 @@
 
 ---
 
-##Approve user
+## Approve user
 **URL:** `/user/approve/:id`
 
 **URL Parameters:** `id: String - user id`
@@ -125,7 +125,7 @@
 
 **Auth required:** `YES`
 
-###Success response
+### Success response
 
 **Code:** `200 OK`
 
@@ -136,7 +136,7 @@
 }
 ```
 
-###Error response
+### Error response
 
 **Code:** `500`
 
@@ -147,7 +147,7 @@ Something went wrong
 
 ---
 
-##Delete user
+## Delete user
 **URL:** `/user/:id`
 
 **URL Parameters:** `id: String - user id`
@@ -156,7 +156,7 @@ Something went wrong
 
 **Auth required:** `YES`
 
-###Success response
+### Success response
 
 **Code:** `200 OK`
 
@@ -167,7 +167,7 @@ Something went wrong
 }
 ```
 
-###Error response
+### Error response
 
 **Code:** `500`
 
@@ -178,14 +178,14 @@ Something went wrong
 
 ---
 
-##Get users
+## Get users
 **URL:** `/user`
 
 **Method:** `GET`
 
 **Auth required:** `YES`
 
-###Success response
+### Success response
 
 **Code:** `200 OK`
 
@@ -205,7 +205,7 @@ Something went wrong
 ]
 ```
 
-###Error response
+### Error response
 
 **Code:** `422 Unprocessable Entity`
 
