@@ -13,7 +13,7 @@ const router = express.Router();
 
 router.get('/', getAllProducts);
 router.post('/', [nameValidator, descriptionValidator, categoryValidator, priceValidator, imgValidator, withJWT], createProducts);
-router.patch('/:id', [nameValidator, descriptionValidator, categoryValidator, priceValidator, imgValidator, withJWT], updateProduct);
+router.patch('/:id', [withJWT], updateProduct);
 router.delete('/:id', withJWT, deleteProduct);
 
 

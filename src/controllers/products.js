@@ -38,9 +38,8 @@ const updateProduct = async (req, res) => {
         res.status(400).json({ errors: errors.array() });
     }
     const { id } = req.params;
-    const { name, description, price, img, categoryId } = req.body;
     try {
-        await ProductModel.findOneAndUpdate({ id }, { name, description, price, img, categoryId }, { upsert: true });
+        await ProductModel.findOneAndUpdate({ id }, [{ $addFields: req.body }], { upsert: true });
         res.status(200).json({ success: 'OK' });
     } catch (e) {
         res.status(500).send('Something went wrong');
