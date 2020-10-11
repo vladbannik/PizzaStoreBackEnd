@@ -12,7 +12,7 @@ const {
 const router = express.Router();
 
 router.get('/', getAllProducts);
-router.post('/', [nameValidator, descriptionValidator, categoryValidator, withJWT], createProducts);
+router.post('/', [nameValidator, descriptionValidator, categoryValidator, priceValidator, imgValidator, withJWT], createProducts);
 router.patch('/:id', [nameValidator, descriptionValidator, categoryValidator, priceValidator, imgValidator, withJWT], updateProduct);
 router.delete('/:id', withJWT, deleteProduct);
 
