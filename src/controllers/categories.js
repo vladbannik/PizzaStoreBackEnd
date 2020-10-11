@@ -43,7 +43,7 @@ const updateCategory = async (req, res) => {
     await CategoriesModel.findOneAndUpdate({ id }, { name }, { upsert: true });
     res.status(200).json({ success: 'OK' });
   } catch (e) {
-    res.status(5000).send('Something went wrong');
+    res.status(500).send('Something went wrong');
   }
 };
 
@@ -54,7 +54,7 @@ const deleteCategory = async (req, res) => {
     await CategoriesModel.findOneAndDelete({ id });
     res.status(200).json({ success: 'OK' });
   } catch (e) {
-    res.status(5000).send('Something went wrong');
+    res.status(500).send('Something went wrong');
   }
 };
 

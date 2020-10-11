@@ -43,7 +43,7 @@ const updateProduct = async (req, res) => {
         await ProductModel.findOneAndUpdate({ id }, { name, description, price, img, categoryId }, { upsert: true });
         res.status(200).json({ success: 'OK' });
     } catch (e) {
-        res.status(5000).send('Something went wrong');
+        res.status(500).send('Something went wrong');
     }
 };
 const deleteProduct = async (req, res) => {
@@ -53,7 +53,7 @@ const deleteProduct = async (req, res) => {
         await ProductModel.findOneAndDelete({ id });
         res.status(200).json({ success: 'OK' });
     } catch (e) {
-        res.status(5000).send('Something went wrong');
+        res.status(500).send('Something went wrong');
     }
 };
 module.exports = {
