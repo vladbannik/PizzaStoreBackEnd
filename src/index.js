@@ -6,6 +6,7 @@ require('dotenv').config();
 const authRouter = require('./routes/auth');
 const userRouter = require('./routes/user');
 const categoriesRouter = require('./routes/categories');
+const productsRouter = require('./routes/products');
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/auth', authRouter);
 app.use('/user', userRouter);
 app.use('/categories', categoriesRouter);
+app.use('/products', productsRouter);
 
 const PORT = process.env.PORT || 8080;
 

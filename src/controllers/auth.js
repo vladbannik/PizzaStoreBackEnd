@@ -14,6 +14,10 @@ const signIn = async (req, res) => {
 
   try {
     const docs = await UserModel.findOne({ email }).exec();
+
+    // eslint-disable-next-line no-throw-literal
+    if (!docs) throw 'Email is incorrect, email does not exist';
+
     const result = await bcrypt.compare(password, docs.password);
 
     // eslint-disable-next-line no-throw-literal
