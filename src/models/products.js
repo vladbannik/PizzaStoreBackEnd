@@ -1,5 +1,4 @@
 const { Schema, model } = require('mongoose');
-const { CategoriesShema } = require('../models/categories');
 const schema = Schema({
     id: {
         type: String,

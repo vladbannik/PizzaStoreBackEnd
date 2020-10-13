@@ -7,6 +7,7 @@ const authRouter = require('./routes/auth');
 const userRouter = require('./routes/user');
 const categoriesRouter = require('./routes/categories');
 const productsRouter = require('./routes/products');
+const ordersRouter = require('./routes/orders');
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use('/auth', authRouter);
 app.use('/user', userRouter);
 app.use('/categories', categoriesRouter);
 app.use('/products', productsRouter);
+app.use('/orders', ordersRouter);
 
 const PORT = process.env.PORT || 8080;
 
