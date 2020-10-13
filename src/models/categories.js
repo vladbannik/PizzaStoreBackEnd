@@ -45,7 +45,7 @@ address: {
   address
 }
 order: [
-{id, size, quantity, total_price}
+{product_id, size, quantity, total_price}
 ]
 
 getOrders - jwt

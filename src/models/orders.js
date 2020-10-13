@@ -4,13 +4,12 @@ const schema = Schema({
         type: String,
         unique: true
     },
-    name: String,
-    description: String,
-    price: {
+    data: { type: Date, default: Date.now },
+    status: String,
+    address: {
         type: Map,
         of: String
     },
-    img: String,
-    categoryId: String,
+    order: [Object]
 });
-module.exports = model('Products', schema);
+module.exports = model('Orders', schema);
