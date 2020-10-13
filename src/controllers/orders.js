@@ -17,11 +17,9 @@ const createOrder = async (req, res) => {
         res.status(400).json({ errors: errors.array() });
     }
     const { status, address, order } = req.body;
-    const curentData = new Date();
     try {
         await ProductModel.create({
             id: uuidv4(),
-            curentData,
             status,
             address,
             order

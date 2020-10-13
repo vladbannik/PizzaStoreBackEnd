@@ -4,7 +4,7 @@ const schema = Schema({
         type: String,
         unique: true
     },
-    data: Date,
+    data: { type: Date, default: Date.now },
     status: String,
     address: {
         type: Map,
