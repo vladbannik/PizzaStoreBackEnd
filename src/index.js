@@ -1,7 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-require('dotenv').config();
+// eslint-disable-next-line global-require
+if (process.env.NODE_ENV !== 'production') require('dotenv').config();
 
 const authRouter = require('./routes/auth');
 const userRouter = require('./routes/user');
