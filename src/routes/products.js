@@ -1,5 +1,5 @@
 const express = require('express');
-const { nameValidator, descriptionValidator, categoryValidator, priceValidator, imgValidator } = require('../validation/products');
+const { nameValidator, descriptionValidator, categoryValidator, priceValidator, sizeValidator, imageValidator } = require('../validation/products');
 const withJWT = require('../utils/withJWT');
 
 const {
@@ -12,7 +12,7 @@ const {
 const router = express.Router();
 
 router.get('/', getAllProducts);
-router.post('/', [nameValidator, descriptionValidator, categoryValidator, priceValidator, imgValidator, withJWT], createProducts);
+router.post('/', [nameValidator, descriptionValidator, categoryValidator, priceValidator, sizeValidator, imageValidator, withJWT], createProducts);
 router.patch('/:id', [withJWT], updateProduct);
 router.delete('/:id', withJWT, deleteProduct);
 

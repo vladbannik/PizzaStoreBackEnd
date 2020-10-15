@@ -6,11 +6,9 @@ const schema = Schema({
     },
     name: String,
     description: String,
-    price: {
-        type: Map,
-        of: String
-    },
-    img: String,
-    categoryId: String,
+    price: [String],
+    size: [String],
+    image: String,
+    categoryName: String,
 });
 module.exports = model('Products', schema);

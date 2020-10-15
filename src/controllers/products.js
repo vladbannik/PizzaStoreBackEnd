@@ -4,7 +4,7 @@ const ProductModel = require('../models/products');
 
 const getAllProducts = async (req, res) => {
     try {
-        const docs = await ProductModel.find({}).select('id name description price img categoryId -_id');
+        const docs = await ProductModel.find({}).select('id name description price size image categoryName -_id');
         res.status(200).json(docs);
     } catch (e) {
         res.status(501).json({ error: { message: 'Something went wrong' } });
@@ -16,15 +16,16 @@ const createProducts = async (req, res) => {
     if (!errors.isEmpty()) {
         res.status(400).json({ errors: errors.array() });
     }
-    const { name, description, price, img, categoryId } = req.body;
+    const { name, description, price, size, image, categoryName } = req.body;
     try {
         await ProductModel.create({
             id: uuidv4(),
             name,
             description,
             price,
-            img,
-            categoryId,
+            size,
+            image,
+            categoryName,
         });
         res.status(200).json({ success: 'Product created' });
     } catch (e) {
