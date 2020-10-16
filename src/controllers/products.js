@@ -4,7 +4,7 @@ const ProductModel = require('../models/products');
 
 const getAllProducts = async (req, res) => {
     try {
-        const docs = await ProductModel.find({}).select('id name description price size image categoryName -_id');
+        const docs = await ProductModel.find({}).select('id name description price sizes image categoryName -_id');
         res.status(200).json(docs);
     } catch (e) {
         res.status(501).json({ error: { message: 'Something went wrong' } });
@@ -13,7 +13,7 @@ const getAllProducts = async (req, res) => {
 const getProduct = async (req, res) => {
     const { categoryName } = req.params;
     try {
-        const docs = await ProductModel.find({ "categoryName": categoryName }).select('id name description price size image categoryName -_id');
+        const docs = await ProductModel.find({ "categoryName": categoryName }).select('id name description price sizes image categoryName -_id');
         res.status(200).json(docs);
     } catch (e) {
         res.status(501).json({ error: { message: 'Something went wrong' } });
@@ -26,13 +26,14 @@ const createProducts = async (req, res) => {
         res.status(400).json({ errors: errors.array() });
     }
     const { name, description, price, size, image, categoryName } = req.body;
+    const sizes = size.map((old) => ({ ...old, id: uuidv4() }));
     try {
         await ProductModel.create({
             id: uuidv4(),
             name,
             description,
             price,
-            size,
+            sizes,
             image,
             categoryName,
         });

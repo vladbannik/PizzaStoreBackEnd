@@ -6,8 +6,8 @@ const schema = Schema({
     },
     name: String,
     description: String,
-    price: [String],
-    size: [String],
+    price: Object,
+    sizes: [{ id: String, label: String, cost: String }],
     image: String,
     categoryName: String,
 });
