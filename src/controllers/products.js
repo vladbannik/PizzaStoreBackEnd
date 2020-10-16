@@ -10,6 +10,15 @@ const getAllProducts = async (req, res) => {
         res.status(501).json({ error: { message: 'Something went wrong' } });
     }
 };
+const getProduct = async (req, res) => {
+    const { categoryName } = req.params;
+    try {
+        const docs = await ProductModel.find({ "categoryName": categoryName }).select('id name description price size image categoryName -_id');
+        res.status(200).json(docs);
+    } catch (e) {
+        res.status(501).json({ error: { message: 'Something went wrong' } });
+    }
+};
 
 const createProducts = async (req, res) => {
     const errors = validationResult(req);
@@ -58,6 +67,7 @@ const deleteProduct = async (req, res) => {
 };
 module.exports = {
     getAllProducts,
+    getProduct,
     createProducts,
     updateProduct,
     deleteProduct
