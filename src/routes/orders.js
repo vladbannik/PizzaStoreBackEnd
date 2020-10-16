@@ -4,13 +4,15 @@ const withJWT = require('../utils/withJWT');
 
 const {
     getAllOrders,
+    getOrder,
     createOrder,
     updateOrder
 } = require('../controllers/orders')
 
 const router = express.Router();
 
-router.get('/', getAllOrders);
+router.get('/', withJWT, getAllOrders);
+router.get('/:orderId', withJWT, getOrder);
 router.post('/', [statusValidator, addressValidator, orderValidator, withJWT], createOrder);
 router.patch('/:id', withJWT, updateOrder);
 
